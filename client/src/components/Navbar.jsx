@@ -70,7 +70,7 @@ const Navbar = observer(() => {
                     </Button>
                 </div>
                 {user.isAuth ?
-                    <Button onClick={() => navigate('/postform')}>
+                    <Button onClick={() => navigate('/postsform')}>
                         Создать карточку товара
                     </Button>
                     :

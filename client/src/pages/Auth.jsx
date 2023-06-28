@@ -19,15 +19,16 @@ const Auth = observer(() => {
 
     let data;
     let resp;
-//по ходу из-за /login?
+
     const click = async () => {
         if (isLogin) {
             try {
                 data = await login(username, password);
+                console.log(data);
                 user.setUser(user);
                 user.setIsAuth(true);
                 user.setData(data);
-                navigate('/posts');
+                navigate('/posts')
             }
             catch (error) {
                 console.log(error);
@@ -40,6 +41,7 @@ const Auth = observer(() => {
                 alert(Object.entries(data))
             } else if (resp.status === 201) {
                 alert('ready')
+                navigate('/posts')
             }
         }
     }
@@ -47,7 +49,7 @@ const Auth = observer(() => {
     return (
         <div className='login'>
             <h2>{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
-            <form>
+            <div>
                 {isLogin
                     ?
                     <span>
@@ -72,7 +74,7 @@ const Auth = observer(() => {
                             <NavLink to='/login'>Есть аккаунт? Авторизируйтесь!</NavLink>
                         </span>
                     }
-                    <Button onClick={click}>
+                    <Button onClick={async () => await click()}>
                         {isLogin ?
                             'Войти'
                             :
@@ -80,8 +82,8 @@ const Auth = observer(() => {
                         }
                     </Button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </div >
     );
 });
 
